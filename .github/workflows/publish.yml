@@ -1,0 +1,107 @@
+name: Publish Artifacts
+
+on:
+  workflow_call:
+    inputs:
+      versions:
+        description: 'The Minecraft versions to publish the artifacts for'
+        required: true
+        type: string
+
+jobs:
+  publish:
+    name: Publish ${{ matrix.versions }} artifacts
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        versions: ${{ fromJSON(inputs.versions) }}
+
+    permissions:
+      contents: write
+      packages: write
+
+    steps:
+      - uses: AshsWorkshop/actions/checkout@4b6fee62c3383c7c4a8b7878a74cce7707a98421 # main
+        with:
+          ref: ${{ github.ref_name }}
+
+      - name: Extract Java version
+        id: extract_java
+        shell: bash
+        run: echo "java_version=$(grep 'java_version' gradle.properties | awk -F= '{$2=$2;print $2}')" >> $GITHUB_OUTPUT
+
+      - name: Setup Java
+        uses: AshsWorkshop/actions/setup-java@4b6fee62c3383c7c4a8b7878a74cce7707a98421 # main
+        with:
+          java-version: ${{ steps.extract_java.outputs.java_version }}
+          distribution: 'microsoft'
+
+      - name: Setup Gradle
+        uses: AshsWorkshop/actions/setup-gradle@4b6fee62c3383c7c4a8b7878a74cce7707a98421 # main
+        with:
+          add-job-summary: 'never'
+
+      - name: Publish artifacts
+        id: publish_artifacts
+        shell: bash
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          UUID_USERNAME: ${{ vars.UUID_USERNAME }}
+          UUID_PASSWORD: ${{ secrets.UUID_PASSWORD }}
+        run: |
+          # Unpack tags
+          ./gradlew unpackTags -Pminecraft_version='${{ matrix.versions }}' 
+
+          # Then generate and compute artifacts
+          ./gradlew computeTagIntersection -Pminecraft_version='${{ matrix.versions }}' 
+
+          # Finally check tag hashes
+          ./gradlew createFileHashes -Pminecraft_version='${{ matrix.versions }}' 
+
+          # If compare file doesn't exist or the file contents are not the same
+          VERSION_RELEASE=""
+          if [[ ! -f "build/compare/${{ matrix.versions }}.json" ]] || (! cmp -s ".generated-hashes/${{ matrix.versions }}.json" "build/compare/${{ matrix.versions }}.json"); then
+            # Publish artifacts
+            ./gradlew publish -Pminecraft_version='${{ matrix.versions }}' 
+
+            # Bump associated artifact version
+            mod_build=$(grep '${{ matrix.versions }}_build' gradle.properties | awk -F= '{$2=$2;print $2}')
+            VERSION_RELEASE="${{ matrix.versions }}.$mod_build"
+            mod_build=$(($mod_build + 1))
+            sed -i "s/${{ matrix.versions }}_build=.*/${{ matrix.versions }}_build=$mod_build/" gradle.properties
+          fi
+          # Report release version
+          echo "published_version=$VERSION_RELEASE" >> $GITHUB_OUTPUT
+
+      - name: Generate Gradle job summary
+        uses: AshsWorkshop/actions/gradle-job-summary@0e8fad11c6fe005217c0440719523927df4d1e5f # main
+
+      - name: Commit ${{ matrix.versions }} and push branch
+        shell: bash
+        run: |
+          if [ -n "$(git status --porcelain)" ]; then
+            # Setup user settings
+            git config --global user.name 'github-actions[bot]'
+            git config --global user.email '41898282+github-actions[bot]@users.noreply.github.com'
+
+            # Commit files
+            git add .
+            git commit -a -m "chore([skip ci]): Action ${{ github.run_number }}: ${{ matrix.versions }} bumps"
+
+            # Compute push
+            versions_against=$(echo '${{ needs.determine-versions.outputs.versions }}' | jq '. | length')
+            MAX_RETRIES=$((versions_against * 5))
+            count=0
+
+            # Handle if exit on error
+            set +e
+
+            until git push --force-with-lease -u origin ${{ github.ref_name }} || [ $count -eq $MAX_RETRIES ]; do
+              ((count++))
+              git fetch
+              git merge -X theirs
+            done
+
+            set -e
+          fi
