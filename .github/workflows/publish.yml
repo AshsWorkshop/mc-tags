@@ -12,8 +12,6 @@ on:
         type: string
         required: true
     secrets:
-      GITHUB_TOKEN:
-        required: true
       UUID_PASSWORD:
         required: true
 
