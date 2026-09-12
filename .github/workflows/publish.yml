@@ -94,7 +94,7 @@ jobs:
             git commit -a -m "chore([skip ci]): Action ${{ github.run_number }}: ${{ matrix.versions }} bumps"
 
             # Compute push
-            versions_against=$(echo '${{ needs.determine-versions.outputs.versions }}' | jq '. | length')
+            versions_against=$(echo '${{ inputs.versions }}' | jq '. | length')
             MAX_RETRIES=$((versions_against * 5))
             count=0
 
