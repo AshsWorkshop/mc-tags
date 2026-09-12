@@ -32,3 +32,7 @@ jobs:
     with:
       versions: ${{ needs.determine-versions.outputs.versions }}
     secrets: inherit
+
+    permissions:
+      contents: write
+      packages: write
