@@ -18,7 +18,7 @@ repositories {
     }
     maven {
         name = 'Transformers Github'
-        url = 'https://maven.pkg.github.com/AshsWorkshop/mc-transformers'
+        url = 'https://maven.pkg.github.com/AshsWorkshop/mc-tags'
         // Credentials are required to pull from Github Packages (requires 'read:packages' scope)
         // See: https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-gradle-registry#using-a-published-package
         credentials {
@@ -44,7 +44,7 @@ repositories {
     }
     maven {
         name = "Transformers Github"
-        url = uri("https://maven.pkg.github.com/AshsWorkshop/mc-transformers")
+        url = uri("https://maven.pkg.github.com/AshsWorkshop/mc-tags")
         // Credentials are required to pull from Github Packages (requires 'read:packages' scope)
         // See: https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-gradle-registry#using-a-published-package
         credentials {
