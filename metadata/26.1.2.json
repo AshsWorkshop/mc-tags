@@ -225,11 +225,11 @@
             ]
         },
         "entity_sub_predicate_type": {
-            "type": "Codec<? extends EntitySubPredicate>",
+            "type": "MapCodec<? extends EntitySubPredicate>",
             "reference": "ENTITY_SUB_PREDICATE_TYPE",
             "imports": [
-                "com.mojang.serialization.Codec",
-                "net.minecraft.advancements.predicates.entity.EntitySubPredicate"
+                "com.mojang.serialization.MapCodec",
+                "net.minecraft.advancements.criterion.EntitySubPredicate"
             ]
         },
         "entity_type": {
@@ -590,11 +590,10 @@
             ]
         },
         "worldgen/structure_processor": {
-            "type": "MapCodec<? extends StructureProcessor>",
+            "type": "StructureProcessorType<?>",
             "reference": "STRUCTURE_PROCESSOR",
             "imports": [
-                "com.mojang.serialization.MapCodec",
-                "net.minecraft.world.level.levelgen.structure.templatesystem.StructureProcessor"
+                "net.minecraft.world.level.levelgen.structure.templatesystem.StructureProcessorType"
             ]
         },
         "worldgen/structure_type": {
@@ -925,13 +924,6 @@
                 "net.minecraft.world.level.levelgen.structure.Structure"
             ]
         },
-        "sulfur_cube_archetype": {
-            "type": "SulfurCubeArchetype",
-            "reference": "SULFUR_CUBE_ARCHETYPE",
-            "imports": [
-                "net.minecraft.world.entity.SulfurCubeArchetype"
-            ]
-        },
         "worldgen/template_pool": {
             "type": "StructureTemplatePool",
             "reference": "TEMPLATE_POOL",
@@ -978,7 +970,7 @@
             "type": "CriterionTrigger<?>",
             "reference": "TRIGGER_TYPE",
             "imports": [
-                "net.minecraft.advancements.triggers.CriterionTrigger"
+                "net.minecraft.advancements.CriterionTrigger"
             ]
         },
         "trim_material": {
