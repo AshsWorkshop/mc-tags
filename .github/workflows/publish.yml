@@ -50,6 +50,9 @@ jobs:
           UUID_USERNAME: ${{ vars.UUID_USERNAME }}
           UUID_PASSWORD: ${{ secrets.UUID_PASSWORD }}
         run: |
+          # Generate reports
+          ./gradlew runReports -Pminecraft_version='${{ matrix.versions }}'
+          
           # Unpack tags
           ./gradlew unpackTags -Pminecraft_version='${{ matrix.versions }}' 
 
