@@ -31,6 +31,7 @@ jobs:
     uses: ./.github/workflows/publish.yml
     with:
       versions: ${{ needs.determine-versions.outputs.versions }}
+      UUID_USERNAME: ${{ vars.UUID_USERNAME }}
     secrets: inherit
 
     permissions:

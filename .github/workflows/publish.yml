@@ -8,6 +8,15 @@ on:
         required: true
         type: string
 
+      UUID_USERNAME:
+        type: string
+        required: true
+    secrets:
+      GITHUB_TOKEN:
+        required: true
+      UUID_PASSWORD:
+        required: true
+
 jobs:
   publish:
     name: Publish ${{ matrix.versions }} artifacts
@@ -47,7 +56,7 @@ jobs:
         shell: bash
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          UUID_USERNAME: ${{ vars.UUID_USERNAME }}
+          UUID_USERNAME: ${{ inputs.UUID_USERNAME }}
           UUID_PASSWORD: ${{ secrets.UUID_PASSWORD }}
         run: |
           # Generate reports
