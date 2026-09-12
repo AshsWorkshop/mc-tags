@@ -58,6 +58,7 @@ jobs:
 
           # Then generate and compute artifacts
           ./gradlew computeTagIntersection -Pminecraft_version='${{ matrix.versions }}' 
+          ./gradlew generateJavaSources -Pminecraft_version='${{ matrix.versions }}' 
 
           # Finally check tag hashes
           ./gradlew createFileHashes -Pminecraft_version='${{ matrix.versions }}' 
