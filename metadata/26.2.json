@@ -1,0 +1,12 @@
+{
+    "classes": {
+        "Registry": "net.minecraft.core.Registry",
+        "Registries": "net.minecraft.core.registries.Registries",
+        "Identifier": "net.minecraft.resources.Identifier",
+        "ResourceKey": "net.minecraft.resources.ResourceKey",
+        "TagKey": "net.minecraft.tags.TagKey"
+    },
+    "ref_from_source_regex": "ResourceKey<Registry<([^\\n]+)>> ([A-Za-z_]+) = [^\\n]+\\(\\s*\"([^\\n]+)\"\\s*\\);",
+    "helper": "static TagKey<::Type::> ::Method::(String path) {\n    return TagKey.create(::RegistryRef::, Identifier.fromNamespaceAndPath(\"::Namespace::\", path));\n}",
+    "entry": "TagKey<::Type::> ::Name:: = ::Method::(\"::Path::\");"
+}
