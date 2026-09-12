@@ -23,7 +23,7 @@ jobs:
         shell: bash
         run: |
           # Output list
-          echo "versions=$(cat releases/latest.json)" >> $GITHUB_OUTPUT
+          echo "versions=$(jq -c releases/latest.json)" >> $GITHUB_OUTPUT
 
   publish:
     needs:
