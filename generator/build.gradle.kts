@@ -269,50 +269,56 @@ val generateJavaSources = tasks.register<Task>("generateJavaSources") {
     val metadata = (slurper.parseText(metadataFile.readText()) as Map<*, *>).toMutableMap()
     // Populate registry data if not present
     if (!metadata.containsKey("registries")) {
-        zipTree(layout.buildDirectory.file("moddev/artifacts/vanilla-${minecraftVersion}-1-sources.jar")).forEach {
-            if (it.path.contains((metadata.get("classes") as Map<*, *>).get("Registries").toString().replace(".", File.separator))) {
-                data class RegistryMetadata(val identifier: String, val type: String, val reference: String, val imports: List<String>)
+        // Check in both places due to run context
+        for (buildDir in listOf(layout.buildDirectory, rootProject.layout.buildDirectory)) {
+            val vanillaSources = buildDir.file("moddev/artifacts/vanilla-${minecraftVersion}-1-sources.jar")
+            if (!vanillaSources.get().asFile.exists()) continue;
+            zipTree(vanillaSources).forEach {
+                if (it.path.contains((metadata.get("classes") as Map<*, *>).get("Registries").toString().replace(".", File.separator))) {
+                    data class RegistryMetadata(val identifier: String, val type: String, val reference: String, val imports: List<String>)
 
-                // Read registry file
-                val text = it.readText()
+                    // Read registry file
+                    val text = it.readText()
 
-                // Get imports
-                val imports = Regex("""import ([^\n]+);""").findAll(text).map { it.groupValues[1] }.groupBy { it.substring(it.lastIndexOf(".") + 1) }
-                val registries: MutableList<RegistryMetadata> = mutableListOf()
+                    // Get imports
+                    val imports = Regex("""import ([^\n]+);""").findAll(text).map { it.groupValues[1] }.groupBy { it.substring(it.lastIndexOf(".") + 1) }
+                    val registries: MutableList<RegistryMetadata> = mutableListOf()
 
-                // Get registry lines
-                Regex(metadata.get("ref_from_source_regex").toString()).findAll(text).forEach {
-                    // Compute relevant imports
-                    val relevantImports: MutableList<String> = mutableListOf()
-                    val type = it.groupValues[1]
-                    var currentSequence: String = ""
-                    type.forEach {
-                        if ("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz".contains(it)) {
-                            currentSequence += it
-                        } else {
-                            if (imports.containsKey(currentSequence)) {
-                                relevantImports.addAll(imports.get(currentSequence)!!)
+                    // Get registry lines
+                    Regex(metadata.get("ref_from_source_regex").toString()).findAll(text).forEach {
+                        // Compute relevant imports
+                        val relevantImports: MutableList<String> = mutableListOf()
+                        val type = it.groupValues[1]
+                        var currentSequence: String = ""
+                        type.forEach {
+                            if ("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz".contains(it)) {
+                                currentSequence += it
+                            } else {
+                                if (imports.containsKey(currentSequence)) {
+                                    relevantImports.addAll(imports.get(currentSequence)!!)
+                                }
+                                currentSequence = ""
                             }
-                            currentSequence = ""
                         }
+                        if (currentSequence.isNotEmpty() && imports.containsKey(currentSequence)) {
+                            relevantImports.addAll(imports.get(currentSequence)!!)
+                        }
+
+                        registries.add(RegistryMetadata(it.groupValues[3], type, it.groupValues[2], relevantImports))
+
                     }
-                    if (currentSequence.isNotEmpty() && imports.containsKey(currentSequence)) {
-                        relevantImports.addAll(imports.get(currentSequence)!!)
+
+                    metadata["registries"] = registries.associate { Pair(it.identifier, mapOf(
+                        "type" to it.type,
+                        "reference" to it.reference,
+                        "imports" to it.imports
+                    )) }
+                    FileWriter(metadataFile, StandardCharsets.UTF_8).use {
+                        it.write(JsonOutput.prettyPrint(JsonOutput.toJson(metadata)))
                     }
-
-                    registries.add(RegistryMetadata(it.groupValues[3], type, it.groupValues[2], relevantImports))
-
-                }
-
-                metadata["registries"] = registries.associate { Pair(it.identifier, mapOf(
-                    "type" to it.type,
-                    "reference" to it.reference,
-                    "imports" to it.imports
-                )) }
-                FileWriter(metadataFile, StandardCharsets.UTF_8).use {
-                    it.write(JsonOutput.prettyPrint(JsonOutput.toJson(metadata)))
                 }
             }
+            break;
         }
     }
 
