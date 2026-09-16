@@ -4,7 +4,7 @@ plugins {
     java
     idea
     // https://projects.neoforged.net/neoforged/moddevgradle
-    id("net.neoforged.moddev") version "2.0.146"
+    id("net.neoforged.moddev") version "2.0.147"
     id("multiloader-publishing")
 }
 
