@@ -8,5 +8,1130 @@
     },
     "ref_from_source_regex": "ResourceKey<Registry<([^\\n]+)>> ([A-Za-z_]+) = [^\\n]+\\(\\s*\"([^\\n]+)\"\\s*\\);",
     "helper": "static TagKey<::Type::> ::Method::(String path) {\n    return TagKey.create(::RegistryRef::, Identifier.fromNamespaceAndPath(\"::Namespace::\", path));\n}",
-    "entry": "TagKey<::Type::> ::Name:: = ::Method::(\"::Path::\");"
+    "entry": "TagKey<::Type::> ::Name:: = ::Method::(\"::Path::\");",
+    "registries": {
+        "activity": {
+            "type": "Activity",
+            "reference": "ACTIVITY",
+            "imports": [
+                "net.minecraft.world.entity.schedule.Activity"
+            ]
+        },
+        "attribute": {
+            "type": "Attribute",
+            "reference": "ATTRIBUTE",
+            "imports": [
+                "net.minecraft.world.entity.ai.attributes.Attribute"
+            ]
+        },
+        "worldgen/biome_source": {
+            "type": "MapCodec<? extends BiomeSource>",
+            "reference": "BIOME_SOURCE",
+            "imports": [
+                "com.mojang.serialization.MapCodec",
+                "net.minecraft.world.level.biome.BiomeSource"
+            ]
+        },
+        "block_entity_type": {
+            "type": "BlockEntityType<?>",
+            "reference": "BLOCK_ENTITY_TYPE",
+            "imports": [
+                "net.minecraft.world.level.block.entity.BlockEntityType"
+            ]
+        },
+        "block_predicate_type": {
+            "type": "BlockPredicateType<?>",
+            "reference": "BLOCK_PREDICATE_TYPE",
+            "imports": [
+                "net.minecraft.world.level.levelgen.blockpredicates.BlockPredicateType"
+            ]
+        },
+        "worldgen/block_state_provider_type": {
+            "type": "MapCodec<? extends BlockStateProvider>",
+            "reference": "BLOCK_STATE_PROVIDER_TYPE",
+            "imports": [
+                "com.mojang.serialization.MapCodec",
+                "net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider"
+            ]
+        },
+        "block": {
+            "type": "Block",
+            "reference": "BLOCK",
+            "imports": [
+                "net.minecraft.world.level.block.Block"
+            ]
+        },
+        "worldgen/carver_type": {
+            "type": "MapCodec<? extends WorldCarver>",
+            "reference": "CARVER_TYPE",
+            "imports": [
+                "com.mojang.serialization.MapCodec",
+                "net.minecraft.world.level.levelgen.carver.WorldCarver"
+            ]
+        },
+        "worldgen/chunk_generator": {
+            "type": "MapCodec<? extends ChunkGenerator>",
+            "reference": "CHUNK_GENERATOR",
+            "imports": [
+                "com.mojang.serialization.MapCodec",
+                "net.minecraft.world.level.chunk.ChunkGenerator"
+            ]
+        },
+        "chunk_status": {
+            "type": "ChunkStatus",
+            "reference": "CHUNK_STATUS",
+            "imports": [
+                "net.minecraft.world.level.chunk.status.ChunkStatus"
+            ]
+        },
+        "command_argument_type": {
+            "type": "ArgumentTypeInfo<?, ?>",
+            "reference": "COMMAND_ARGUMENT_TYPE",
+            "imports": [
+                "net.minecraft.commands.synchronization.ArgumentTypeInfo"
+            ]
+        },
+        "consume_effect_type": {
+            "type": "ConsumeEffect.Type<?>",
+            "reference": "CONSUME_EFFECT_TYPE",
+            "imports": [
+                "net.minecraft.world.item.consume_effects.ConsumeEffect"
+            ]
+        },
+        "creative_mode_tab": {
+            "type": "CreativeModeTab",
+            "reference": "CREATIVE_MODE_TAB",
+            "imports": [
+                "net.minecraft.world.item.CreativeModeTab"
+            ]
+        },
+        "custom_stat": {
+            "type": "Identifier",
+            "reference": "CUSTOM_STAT",
+            "imports": [
+                "net.minecraft.resources.Identifier"
+            ]
+        },
+        "data_component_predicate_type": {
+            "type": "DataComponentPredicate.Type<?>",
+            "reference": "DATA_COMPONENT_PREDICATE_TYPE",
+            "imports": [
+                "net.minecraft.core.component.predicates.DataComponentPredicate"
+            ]
+        },
+        "data_component_type": {
+            "type": "DataComponentType<?>",
+            "reference": "DATA_COMPONENT_TYPE",
+            "imports": [
+                "net.minecraft.core.component.DataComponentType"
+            ]
+        },
+        "game_rule": {
+            "type": "GameRule<?>",
+            "reference": "GAME_RULE",
+            "imports": [
+                "net.minecraft.world.level.gamerules.GameRule"
+            ]
+        },
+        "debug_subscription": {
+            "type": "DebugSubscription<?>",
+            "reference": "DEBUG_SUBSCRIPTION",
+            "imports": [
+                "net.minecraft.util.debug.DebugSubscription"
+            ]
+        },
+        "worldgen/density_function_type": {
+            "type": "MapCodec<? extends DensityFunction>",
+            "reference": "DENSITY_FUNCTION_TYPE",
+            "imports": [
+                "com.mojang.serialization.MapCodec",
+                "net.minecraft.world.level.levelgen.densityfunction.DensityFunction"
+            ]
+        },
+        "dialog_body_type": {
+            "type": "MapCodec<? extends DialogBody>",
+            "reference": "DIALOG_BODY_TYPE",
+            "imports": [
+                "com.mojang.serialization.MapCodec",
+                "net.minecraft.server.dialog.body.DialogBody"
+            ]
+        },
+        "dialog_type": {
+            "type": "MapCodec<? extends Dialog>",
+            "reference": "DIALOG_TYPE",
+            "imports": [
+                "com.mojang.serialization.MapCodec",
+                "net.minecraft.server.dialog.Dialog"
+            ]
+        },
+        "enchantment_effect_component_type": {
+            "type": "DataComponentType<?>",
+            "reference": "ENCHANTMENT_EFFECT_COMPONENT_TYPE",
+            "imports": [
+                "net.minecraft.core.component.DataComponentType"
+            ]
+        },
+        "enchantment_entity_effect_type": {
+            "type": "MapCodec<? extends EnchantmentEntityEffect>",
+            "reference": "ENCHANTMENT_ENTITY_EFFECT_TYPE",
+            "imports": [
+                "com.mojang.serialization.MapCodec",
+                "net.minecraft.world.item.enchantment.effects.EnchantmentEntityEffect"
+            ]
+        },
+        "enchantment_level_based_value_type": {
+            "type": "MapCodec<? extends LevelBasedValue>",
+            "reference": "ENCHANTMENT_LEVEL_BASED_VALUE_TYPE",
+            "imports": [
+                "com.mojang.serialization.MapCodec",
+                "net.minecraft.world.item.enchantment.LevelBasedValue"
+            ]
+        },
+        "enchantment_location_based_effect_type": {
+            "type": "MapCodec<? extends EnchantmentLocationBasedEffect>",
+            "reference": "ENCHANTMENT_LOCATION_BASED_EFFECT_TYPE",
+            "imports": [
+                "com.mojang.serialization.MapCodec",
+                "net.minecraft.world.item.enchantment.effects.EnchantmentLocationBasedEffect"
+            ]
+        },
+        "enchantment_provider_type": {
+            "type": "MapCodec<? extends EnchantmentProvider>",
+            "reference": "ENCHANTMENT_PROVIDER_TYPE",
+            "imports": [
+                "com.mojang.serialization.MapCodec",
+                "net.minecraft.world.item.enchantment.providers.EnchantmentProvider"
+            ]
+        },
+        "enchantment_value_effect_type": {
+            "type": "MapCodec<? extends EnchantmentValueEffect>",
+            "reference": "ENCHANTMENT_VALUE_EFFECT_TYPE",
+            "imports": [
+                "com.mojang.serialization.MapCodec",
+                "net.minecraft.world.item.enchantment.effects.EnchantmentValueEffect"
+            ]
+        },
+        "entity_sub_predicate_type": {
+            "type": "Codec<? extends EntitySubPredicate>",
+            "reference": "ENTITY_SUB_PREDICATE_TYPE",
+            "imports": [
+                "com.mojang.serialization.Codec",
+                "net.minecraft.advancements.predicates.entity.EntitySubPredicate"
+            ]
+        },
+        "entity_type": {
+            "type": "EntityType<?>",
+            "reference": "ENTITY_TYPE",
+            "imports": [
+                "net.minecraft.world.entity.EntityType"
+            ]
+        },
+        "environment_attribute": {
+            "type": "EnvironmentAttribute<?>",
+            "reference": "ENVIRONMENT_ATTRIBUTE",
+            "imports": [
+                "net.minecraft.world.attribute.EnvironmentAttribute"
+            ]
+        },
+        "attribute_type": {
+            "type": "AttributeType<?>",
+            "reference": "ATTRIBUTE_TYPE",
+            "imports": [
+                "net.minecraft.world.attribute.AttributeType"
+            ]
+        },
+        "worldgen/feature_size_type": {
+            "type": "FeatureSizeType<?>",
+            "reference": "FEATURE_SIZE_TYPE",
+            "imports": [
+                "net.minecraft.world.level.levelgen.feature.featuresize.FeatureSizeType"
+            ]
+        },
+        "worldgen/feature_type": {
+            "type": "MapCodec<? extends Feature>",
+            "reference": "FEATURE_TYPE",
+            "imports": [
+                "com.mojang.serialization.MapCodec",
+                "net.minecraft.world.level.levelgen.feature.Feature"
+            ]
+        },
+        "float_provider_type": {
+            "type": "MapCodec<? extends FloatProvider>",
+            "reference": "FLOAT_PROVIDER_TYPE",
+            "imports": [
+                "com.mojang.serialization.MapCodec",
+                "net.minecraft.util.valueproviders.FloatProvider"
+            ]
+        },
+        "fluid": {
+            "type": "Fluid",
+            "reference": "FLUID",
+            "imports": [
+                "net.minecraft.world.level.material.Fluid"
+            ]
+        },
+        "worldgen/foliage_placer_type": {
+            "type": "FoliagePlacerType<?>",
+            "reference": "FOLIAGE_PLACER_TYPE",
+            "imports": [
+                "net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacerType"
+            ]
+        },
+        "game_event": {
+            "type": "GameEvent",
+            "reference": "GAME_EVENT",
+            "imports": [
+                "net.minecraft.world.level.gameevent.GameEvent"
+            ]
+        },
+        "height_provider_type": {
+            "type": "HeightProviderType<?>",
+            "reference": "HEIGHT_PROVIDER_TYPE",
+            "imports": [
+                "net.minecraft.world.level.levelgen.heightproviders.HeightProviderType"
+            ]
+        },
+        "input_control_type": {
+            "type": "MapCodec<? extends InputControl>",
+            "reference": "INPUT_CONTROL_TYPE",
+            "imports": [
+                "com.mojang.serialization.MapCodec",
+                "net.minecraft.server.dialog.input.InputControl"
+            ]
+        },
+        "int_provider_type": {
+            "type": "MapCodec<? extends IntProvider>",
+            "reference": "INT_PROVIDER_TYPE",
+            "imports": [
+                "com.mojang.serialization.MapCodec",
+                "net.minecraft.util.valueproviders.IntProvider"
+            ]
+        },
+        "item": {
+            "type": "Item",
+            "reference": "ITEM",
+            "imports": [
+                "net.minecraft.world.item.Item"
+            ]
+        },
+        "slot_source_type": {
+            "type": "MapCodec<? extends SlotSource>",
+            "reference": "SLOT_SOURCE_TYPE",
+            "imports": [
+                "com.mojang.serialization.MapCodec",
+                "net.minecraft.world.item.slot.SlotSource"
+            ]
+        },
+        "loot_condition_type": {
+            "type": "MapCodec<? extends LootItemCondition>",
+            "reference": "LOOT_CONDITION_TYPE",
+            "imports": [
+                "com.mojang.serialization.MapCodec",
+                "net.minecraft.world.level.storage.loot.predicates.LootItemCondition"
+            ]
+        },
+        "loot_function_type": {
+            "type": "MapCodec<? extends LootItemFunction>",
+            "reference": "LOOT_FUNCTION_TYPE",
+            "imports": [
+                "com.mojang.serialization.MapCodec",
+                "net.minecraft.world.level.storage.loot.functions.LootItemFunction"
+            ]
+        },
+        "loot_nbt_provider_type": {
+            "type": "MapCodec<? extends NbtProvider>",
+            "reference": "LOOT_NBT_PROVIDER_TYPE",
+            "imports": [
+                "com.mojang.serialization.MapCodec",
+                "net.minecraft.world.level.storage.loot.providers.nbt.NbtProvider"
+            ]
+        },
+        "context_float_provider_type": {
+            "type": "MapCodec<? extends ContextFloatProvider>",
+            "reference": "CONTEXT_FLOAT_PROVIDER_TYPE",
+            "imports": [
+                "com.mojang.serialization.MapCodec",
+                "net.minecraft.world.level.storage.loot.providers.number.floats.ContextFloatProvider"
+            ]
+        },
+        "context_int_provider_type": {
+            "type": "MapCodec<? extends ContextIntProvider>",
+            "reference": "CONTEXT_INT_PROVIDER_TYPE",
+            "imports": [
+                "com.mojang.serialization.MapCodec",
+                "net.minecraft.world.level.storage.loot.providers.number.ints.ContextIntProvider"
+            ]
+        },
+        "loot_pool_entry_type": {
+            "type": "MapCodec<? extends LootPoolEntryContainer>",
+            "reference": "LOOT_POOL_ENTRY_TYPE",
+            "imports": [
+                "com.mojang.serialization.MapCodec",
+                "net.minecraft.world.level.storage.loot.entries.LootPoolEntryContainer"
+            ]
+        },
+        "loot_score_provider_type": {
+            "type": "MapCodec<? extends ScoreboardNameProvider>",
+            "reference": "LOOT_SCORE_PROVIDER_TYPE",
+            "imports": [
+                "com.mojang.serialization.MapCodec",
+                "net.minecraft.world.level.storage.loot.providers.score.ScoreboardNameProvider"
+            ]
+        },
+        "map_decoration_type": {
+            "type": "MapDecorationType",
+            "reference": "MAP_DECORATION_TYPE",
+            "imports": [
+                "net.minecraft.world.level.saveddata.maps.MapDecorationType"
+            ]
+        },
+        "worldgen/material_condition_type": {
+            "type": "MapCodec<? extends MaterialCondition>",
+            "reference": "MATERIAL_CONDITION_TYPE",
+            "imports": [
+                "com.mojang.serialization.MapCodec",
+                "net.minecraft.world.level.levelgen.material.condition.MaterialCondition"
+            ]
+        },
+        "worldgen/material_rule_type": {
+            "type": "MapCodec<? extends MaterialRule>",
+            "reference": "MATERIAL_RULE_TYPE",
+            "imports": [
+                "com.mojang.serialization.MapCodec",
+                "net.minecraft.world.level.levelgen.material.rule.MaterialRule"
+            ]
+        },
+        "memory_module_type": {
+            "type": "MemoryModuleType<?>",
+            "reference": "MEMORY_MODULE_TYPE",
+            "imports": [
+                "net.minecraft.world.entity.ai.memory.MemoryModuleType"
+            ]
+        },
+        "menu": {
+            "type": "MenuType<?>",
+            "reference": "MENU",
+            "imports": [
+                "net.minecraft.world.inventory.MenuType"
+            ]
+        },
+        "mob_effect": {
+            "type": "MobEffect",
+            "reference": "MOB_EFFECT",
+            "imports": [
+                "net.minecraft.world.effect.MobEffect"
+            ]
+        },
+        "number_format_type": {
+            "type": "NumberFormatType<?>",
+            "reference": "NUMBER_FORMAT_TYPE",
+            "imports": [
+                "net.minecraft.network.chat.numbers.NumberFormatType"
+            ]
+        },
+        "particle_type": {
+            "type": "ParticleType<?>",
+            "reference": "PARTICLE_TYPE",
+            "imports": [
+                "net.minecraft.core.particles.ParticleType"
+            ]
+        },
+        "worldgen/placement_modifier_type": {
+            "type": "MapCodec<? extends PlacementModifier>",
+            "reference": "PLACEMENT_MODIFIER_TYPE",
+            "imports": [
+                "com.mojang.serialization.MapCodec",
+                "net.minecraft.world.level.levelgen.placement.PlacementModifier"
+            ]
+        },
+        "point_of_interest_type": {
+            "type": "PoiType",
+            "reference": "POINT_OF_INTEREST_TYPE",
+            "imports": [
+                "net.minecraft.world.entity.ai.village.poi.PoiType"
+            ]
+        },
+        "worldgen/pool_alias_binding": {
+            "type": "MapCodec<? extends PoolAliasBinding>",
+            "reference": "POOL_ALIAS_BINDING",
+            "imports": [
+                "com.mojang.serialization.MapCodec",
+                "net.minecraft.world.level.levelgen.structure.pools.alias.PoolAliasBinding"
+            ]
+        },
+        "position_source_type": {
+            "type": "PositionSourceType<?>",
+            "reference": "POSITION_SOURCE_TYPE",
+            "imports": [
+                "net.minecraft.world.level.gameevent.PositionSourceType"
+            ]
+        },
+        "pos_rule_test": {
+            "type": "PosRuleTestType<?>",
+            "reference": "POS_RULE_TEST",
+            "imports": [
+                "net.minecraft.world.level.levelgen.structure.templatesystem.PosRuleTestType"
+            ]
+        },
+        "potion": {
+            "type": "Potion",
+            "reference": "POTION",
+            "imports": [
+                "net.minecraft.world.item.alchemy.Potion"
+            ]
+        },
+        "recipe_book_category": {
+            "type": "RecipeBookCategory",
+            "reference": "RECIPE_BOOK_CATEGORY",
+            "imports": [
+                "net.minecraft.world.item.crafting.RecipeBookCategory"
+            ]
+        },
+        "recipe_display": {
+            "type": "RecipeDisplay.Type<?>",
+            "reference": "RECIPE_DISPLAY",
+            "imports": [
+                "net.minecraft.world.item.crafting.display.RecipeDisplay"
+            ]
+        },
+        "recipe_serializer": {
+            "type": "RecipeSerializer<?>",
+            "reference": "RECIPE_SERIALIZER",
+            "imports": [
+                "net.minecraft.world.item.crafting.RecipeSerializer"
+            ]
+        },
+        "recipe_type": {
+            "type": "RecipeType<?>",
+            "reference": "RECIPE_TYPE",
+            "imports": [
+                "net.minecraft.world.item.crafting.RecipeType"
+            ]
+        },
+        "worldgen/root_placer_type": {
+            "type": "RootPlacerType<?>",
+            "reference": "ROOT_PLACER_TYPE",
+            "imports": [
+                "net.minecraft.world.level.levelgen.feature.rootplacers.RootPlacerType"
+            ]
+        },
+        "rule_block_entity_modifier": {
+            "type": "RuleBlockEntityModifierType<?>",
+            "reference": "RULE_BLOCK_ENTITY_MODIFIER",
+            "imports": [
+                "net.minecraft.world.level.levelgen.structure.templatesystem.rule.blockentity.RuleBlockEntityModifierType"
+            ]
+        },
+        "rule_test": {
+            "type": "RuleTestType<?>",
+            "reference": "RULE_TEST",
+            "imports": [
+                "net.minecraft.world.level.levelgen.structure.templatesystem.RuleTestType"
+            ]
+        },
+        "sensor_type": {
+            "type": "SensorType<?>",
+            "reference": "SENSOR_TYPE",
+            "imports": [
+                "net.minecraft.world.entity.ai.sensing.SensorType"
+            ]
+        },
+        "slot_display": {
+            "type": "SlotDisplay.Type<?>",
+            "reference": "SLOT_DISPLAY",
+            "imports": [
+                "net.minecraft.world.item.crafting.display.SlotDisplay"
+            ]
+        },
+        "sound_event": {
+            "type": "SoundEvent",
+            "reference": "SOUND_EVENT",
+            "imports": [
+                "net.minecraft.sounds.SoundEvent"
+            ]
+        },
+        "spawn_condition_type": {
+            "type": "MapCodec<? extends SpawnCondition>",
+            "reference": "SPAWN_CONDITION_TYPE",
+            "imports": [
+                "com.mojang.serialization.MapCodec",
+                "net.minecraft.world.entity.variant.SpawnCondition"
+            ]
+        },
+        "stat_type": {
+            "type": "StatType<?>",
+            "reference": "STAT_TYPE",
+            "imports": [
+                "net.minecraft.stats.StatType"
+            ]
+        },
+        "worldgen/structure_piece": {
+            "type": "StructurePieceType",
+            "reference": "STRUCTURE_PIECE",
+            "imports": [
+                "net.minecraft.world.level.levelgen.structure.pieces.StructurePieceType"
+            ]
+        },
+        "worldgen/structure_placement": {
+            "type": "MapCodec<? extends StructurePlacement>",
+            "reference": "STRUCTURE_PLACEMENT",
+            "imports": [
+                "com.mojang.serialization.MapCodec",
+                "net.minecraft.world.level.levelgen.structure.placement.StructurePlacement"
+            ]
+        },
+        "worldgen/structure_pool_element": {
+            "type": "StructurePoolElementType<?>",
+            "reference": "STRUCTURE_POOL_ELEMENT",
+            "imports": [
+                "net.minecraft.world.level.levelgen.structure.pools.StructurePoolElementType"
+            ]
+        },
+        "worldgen/structure_processor": {
+            "type": "MapCodec<? extends StructureProcessor>",
+            "reference": "STRUCTURE_PROCESSOR",
+            "imports": [
+                "com.mojang.serialization.MapCodec",
+                "net.minecraft.world.level.levelgen.structure.templatesystem.StructureProcessor"
+            ]
+        },
+        "worldgen/structure_type": {
+            "type": "StructureType<?>",
+            "reference": "STRUCTURE_TYPE",
+            "imports": [
+                "net.minecraft.world.level.levelgen.structure.StructureType"
+            ]
+        },
+        "dialog_action_type": {
+            "type": "MapCodec<? extends Action>",
+            "reference": "DIALOG_ACTION_TYPE",
+            "imports": [
+                "com.mojang.serialization.MapCodec",
+                "net.minecraft.server.dialog.action.Action"
+            ]
+        },
+        "test_environment_definition_type": {
+            "type": "MapCodec<? extends TestEnvironmentDefinition<?>>",
+            "reference": "TEST_ENVIRONMENT_DEFINITION_TYPE",
+            "imports": [
+                "com.mojang.serialization.MapCodec",
+                "net.minecraft.gametest.framework.TestEnvironmentDefinition"
+            ]
+        },
+        "test_function": {
+            "type": "Consumer<GameTestHelper>",
+            "reference": "TEST_FUNCTION",
+            "imports": [
+                "java.util.function.Consumer",
+                "net.minecraft.gametest.framework.GameTestHelper"
+            ]
+        },
+        "test_instance_type": {
+            "type": "MapCodec<? extends GameTestInstance>",
+            "reference": "TEST_INSTANCE_TYPE",
+            "imports": [
+                "com.mojang.serialization.MapCodec",
+                "net.minecraft.gametest.framework.GameTestInstance"
+            ]
+        },
+        "ticket_type": {
+            "type": "TicketType",
+            "reference": "TICKET_TYPE",
+            "imports": [
+                "net.minecraft.server.level.TicketType"
+            ]
+        },
+        "worldgen/tree_decorator_type": {
+            "type": "TreeDecoratorType<?>",
+            "reference": "TREE_DECORATOR_TYPE",
+            "imports": [
+                "net.minecraft.world.level.levelgen.feature.treedecorators.TreeDecoratorType"
+            ]
+        },
+        "worldgen/trunk_placer_type": {
+            "type": "TrunkPlacerType<?>",
+            "reference": "TRUNK_PLACER_TYPE",
+            "imports": [
+                "net.minecraft.world.level.levelgen.feature.trunkplacers.TrunkPlacerType"
+            ]
+        },
+        "villager_profession": {
+            "type": "VillagerProfession",
+            "reference": "VILLAGER_PROFESSION",
+            "imports": [
+                "net.minecraft.world.entity.npc.villager.VillagerProfession"
+            ]
+        },
+        "villager_type": {
+            "type": "VillagerType",
+            "reference": "VILLAGER_TYPE",
+            "imports": [
+                "net.minecraft.world.entity.npc.villager.VillagerType"
+            ]
+        },
+        "incoming_rpc_methods": {
+            "type": "IncomingRpcMethod<?, ?>",
+            "reference": "INCOMING_RPC_METHOD",
+            "imports": [
+                "net.minecraft.server.jsonrpc.IncomingRpcMethod"
+            ]
+        },
+        "outgoing_rpc_methods": {
+            "type": "OutgoingRpcMethod<?, ?>",
+            "reference": "OUTGOING_RPC_METHOD",
+            "imports": [
+                "net.minecraft.server.jsonrpc.OutgoingRpcMethod"
+            ]
+        },
+        "permission_type": {
+            "type": "MapCodec<? extends Permission>",
+            "reference": "PERMISSION_TYPE",
+            "imports": [
+                "com.mojang.serialization.MapCodec",
+                "net.minecraft.server.permissions.Permission"
+            ]
+        },
+        "permission_check_type": {
+            "type": "MapCodec<? extends PermissionCheck>",
+            "reference": "PERMISSION_CHECK_TYPE",
+            "imports": [
+                "com.mojang.serialization.MapCodec",
+                "net.minecraft.server.permissions.PermissionCheck"
+            ]
+        },
+        "context_key_set": {
+            "type": "ContextKeySet",
+            "reference": "CONTEXT_KEY_SET",
+            "imports": [
+                "net.minecraft.util.context.ContextKeySet"
+            ]
+        },
+        "banner_pattern": {
+            "type": "BannerPattern",
+            "reference": "BANNER_PATTERN",
+            "imports": [
+                "net.minecraft.world.level.block.entity.BannerPattern"
+            ]
+        },
+        "worldgen/biome": {
+            "type": "Biome",
+            "reference": "BIOME",
+            "imports": [
+                "net.minecraft.world.level.biome.Biome"
+            ]
+        },
+        "worldgen/block_state_provider": {
+            "type": "BlockStateProvider",
+            "reference": "BLOCK_STATE_PROVIDER",
+            "imports": [
+                "net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider"
+            ]
+        },
+        "cat_sound_variant": {
+            "type": "CatSoundVariant",
+            "reference": "CAT_SOUND_VARIANT",
+            "imports": [
+                "net.minecraft.world.entity.animal.feline.CatSoundVariant"
+            ]
+        },
+        "cat_variant": {
+            "type": "CatVariant",
+            "reference": "CAT_VARIANT",
+            "imports": [
+                "net.minecraft.world.entity.animal.feline.CatVariant"
+            ]
+        },
+        "worldgen/carver": {
+            "type": "WorldCarver",
+            "reference": "CARVER",
+            "imports": [
+                "net.minecraft.world.level.levelgen.carver.WorldCarver"
+            ]
+        },
+        "chat_type": {
+            "type": "ChatType",
+            "reference": "CHAT_TYPE",
+            "imports": [
+                "net.minecraft.network.chat.ChatType"
+            ]
+        },
+        "chicken_sound_variant": {
+            "type": "ChickenSoundVariant",
+            "reference": "CHICKEN_SOUND_VARIANT",
+            "imports": [
+                "net.minecraft.world.entity.animal.chicken.ChickenSoundVariant"
+            ]
+        },
+        "chicken_variant": {
+            "type": "ChickenVariant",
+            "reference": "CHICKEN_VARIANT",
+            "imports": [
+                "net.minecraft.world.entity.animal.chicken.ChickenVariant"
+            ]
+        },
+        "zombie_nautilus_variant": {
+            "type": "ZombieNautilusVariant",
+            "reference": "ZOMBIE_NAUTILUS_VARIANT",
+            "imports": [
+                "net.minecraft.world.entity.animal.nautilus.ZombieNautilusVariant"
+            ]
+        },
+        "worldgen/feature": {
+            "type": "Feature",
+            "reference": "FEATURE",
+            "imports": [
+                "net.minecraft.world.level.levelgen.feature.Feature"
+            ]
+        },
+        "cow_sound_variant": {
+            "type": "CowSoundVariant",
+            "reference": "COW_SOUND_VARIANT",
+            "imports": [
+                "net.minecraft.world.entity.animal.cow.CowSoundVariant"
+            ]
+        },
+        "cow_variant": {
+            "type": "CowVariant",
+            "reference": "COW_VARIANT",
+            "imports": [
+                "net.minecraft.world.entity.animal.cow.CowVariant"
+            ]
+        },
+        "damage_type": {
+            "type": "DamageType",
+            "reference": "DAMAGE_TYPE",
+            "imports": [
+                "net.minecraft.world.damagesource.DamageType"
+            ]
+        },
+        "worldgen/density_function": {
+            "type": "DensityFunction",
+            "reference": "DENSITY_FUNCTION",
+            "imports": [
+                "net.minecraft.world.level.levelgen.densityfunction.DensityFunction"
+            ]
+        },
+        "dialog": {
+            "type": "Dialog",
+            "reference": "DIALOG",
+            "imports": [
+                "net.minecraft.server.dialog.Dialog"
+            ]
+        },
+        "dimension_type": {
+            "type": "DimensionType",
+            "reference": "DIMENSION_TYPE",
+            "imports": [
+                "net.minecraft.world.level.dimension.DimensionType"
+            ]
+        },
+        "enchantment_provider": {
+            "type": "EnchantmentProvider",
+            "reference": "ENCHANTMENT_PROVIDER",
+            "imports": [
+                "net.minecraft.world.item.enchantment.providers.EnchantmentProvider"
+            ]
+        },
+        "enchantment": {
+            "type": "Enchantment",
+            "reference": "ENCHANTMENT",
+            "imports": [
+                "net.minecraft.world.item.enchantment.Enchantment"
+            ]
+        },
+        "worldgen/flat_level_generator_preset": {
+            "type": "FlatLevelGeneratorPreset",
+            "reference": "FLAT_LEVEL_GENERATOR_PRESET",
+            "imports": [
+                "net.minecraft.world.level.levelgen.flat.FlatLevelGeneratorPreset"
+            ]
+        },
+        "frog_variant": {
+            "type": "FrogVariant",
+            "reference": "FROG_VARIANT",
+            "imports": [
+                "net.minecraft.world.entity.animal.frog.FrogVariant"
+            ]
+        },
+        "instrument": {
+            "type": "Instrument",
+            "reference": "INSTRUMENT",
+            "imports": [
+                "net.minecraft.world.item.Instrument"
+            ]
+        },
+        "jukebox_song": {
+            "type": "JukeboxSong",
+            "reference": "JUKEBOX_SONG",
+            "imports": [
+                "net.minecraft.world.item.JukeboxSong"
+            ]
+        },
+        "worldgen/material_condition": {
+            "type": "MaterialCondition",
+            "reference": "MATERIAL_CONDITION",
+            "imports": [
+                "net.minecraft.world.level.levelgen.material.condition.MaterialCondition"
+            ]
+        },
+        "worldgen/material_rule": {
+            "type": "MaterialRule",
+            "reference": "MATERIAL_RULE",
+            "imports": [
+                "net.minecraft.world.level.levelgen.material.rule.MaterialRule"
+            ]
+        },
+        "worldgen/multi_noise_biome_source_parameter_list": {
+            "type": "MultiNoiseBiomeSourceParameterList",
+            "reference": "MULTI_NOISE_BIOME_SOURCE_PARAMETER_LIST",
+            "imports": [
+                "net.minecraft.world.level.biome.MultiNoiseBiomeSourceParameterList"
+            ]
+        },
+        "worldgen/noise_settings": {
+            "type": "NoiseGeneratorSettings",
+            "reference": "NOISE_SETTINGS",
+            "imports": [
+                "net.minecraft.world.level.levelgen.NoiseGeneratorSettings"
+            ]
+        },
+        "worldgen/noise": {
+            "type": "NormalNoise",
+            "reference": "NOISE",
+            "imports": [
+                "net.minecraft.world.level.levelgen.synth.NormalNoise"
+            ]
+        },
+        "painting_variant": {
+            "type": "PaintingVariant",
+            "reference": "PAINTING_VARIANT",
+            "imports": [
+                "net.minecraft.world.entity.decoration.painting.PaintingVariant"
+            ]
+        },
+        "pig_sound_variant": {
+            "type": "PigSoundVariant",
+            "reference": "PIG_SOUND_VARIANT",
+            "imports": [
+                "net.minecraft.world.entity.animal.pig.PigSoundVariant"
+            ]
+        },
+        "pig_variant": {
+            "type": "PigVariant",
+            "reference": "PIG_VARIANT",
+            "imports": [
+                "net.minecraft.world.entity.animal.pig.PigVariant"
+            ]
+        },
+        "worldgen/placed_feature": {
+            "type": "PlacedFeature",
+            "reference": "PLACED_FEATURE",
+            "imports": [
+                "net.minecraft.world.level.levelgen.placement.PlacedFeature"
+            ]
+        },
+        "worldgen/processor_list": {
+            "type": "StructureProcessorList",
+            "reference": "PROCESSOR_LIST",
+            "imports": [
+                "net.minecraft.world.level.levelgen.structure.templatesystem.StructureProcessorList"
+            ]
+        },
+        "worldgen/structure_set": {
+            "type": "StructureSet",
+            "reference": "STRUCTURE_SET",
+            "imports": [
+                "net.minecraft.world.level.levelgen.structure.StructureSet"
+            ]
+        },
+        "worldgen/structure": {
+            "type": "Structure",
+            "reference": "STRUCTURE",
+            "imports": [
+                "net.minecraft.world.level.levelgen.structure.Structure"
+            ]
+        },
+        "sulfur_cube_archetype": {
+            "type": "SulfurCubeArchetype",
+            "reference": "SULFUR_CUBE_ARCHETYPE",
+            "imports": [
+                "net.minecraft.world.entity.SulfurCubeArchetype"
+            ]
+        },
+        "worldgen/template_pool": {
+            "type": "StructureTemplatePool",
+            "reference": "TEMPLATE_POOL",
+            "imports": [
+                "net.minecraft.world.level.levelgen.structure.pools.StructureTemplatePool"
+            ]
+        },
+        "test_environment": {
+            "type": "TestEnvironmentDefinition<?>",
+            "reference": "TEST_ENVIRONMENT",
+            "imports": [
+                "net.minecraft.gametest.framework.TestEnvironmentDefinition"
+            ]
+        },
+        "test_instance": {
+            "type": "GameTestInstance",
+            "reference": "TEST_INSTANCE",
+            "imports": [
+                "net.minecraft.gametest.framework.GameTestInstance"
+            ]
+        },
+        "timeline": {
+            "type": "Timeline",
+            "reference": "TIMELINE",
+            "imports": [
+                "net.minecraft.world.timeline.Timeline"
+            ]
+        },
+        "trade_set": {
+            "type": "TradeSet",
+            "reference": "TRADE_SET",
+            "imports": [
+                "net.minecraft.world.item.trading.TradeSet"
+            ]
+        },
+        "trial_spawner": {
+            "type": "TrialSpawnerConfig",
+            "reference": "TRIAL_SPAWNER_CONFIG",
+            "imports": [
+                "net.minecraft.world.level.block.entity.trialspawner.TrialSpawnerConfig"
+            ]
+        },
+        "trigger_type": {
+            "type": "CriterionTrigger<?>",
+            "reference": "TRIGGER_TYPE",
+            "imports": [
+                "net.minecraft.advancements.triggers.CriterionTrigger"
+            ]
+        },
+        "trim_material": {
+            "type": "TrimMaterial",
+            "reference": "TRIM_MATERIAL",
+            "imports": [
+                "net.minecraft.world.item.equipment.trim.TrimMaterial"
+            ]
+        },
+        "trim_pattern": {
+            "type": "TrimPattern",
+            "reference": "TRIM_PATTERN",
+            "imports": [
+                "net.minecraft.world.item.equipment.trim.TrimPattern"
+            ]
+        },
+        "villager_trade": {
+            "type": "VillagerTrade",
+            "reference": "VILLAGER_TRADE",
+            "imports": [
+                "net.minecraft.world.item.trading.VillagerTrade"
+            ]
+        },
+        "wolf_variant": {
+            "type": "WolfVariant",
+            "reference": "WOLF_VARIANT",
+            "imports": [
+                "net.minecraft.world.entity.animal.wolf.WolfVariant"
+            ]
+        },
+        "wolf_sound_variant": {
+            "type": "WolfSoundVariant",
+            "reference": "WOLF_SOUND_VARIANT",
+            "imports": [
+                "net.minecraft.world.entity.animal.wolf.WolfSoundVariant"
+            ]
+        },
+        "world_clock": {
+            "type": "WorldClock",
+            "reference": "WORLD_CLOCK",
+            "imports": [
+                "net.minecraft.world.clock.WorldClock"
+            ]
+        },
+        "worldgen/world_preset": {
+            "type": "WorldPreset",
+            "reference": "WORLD_PRESET",
+            "imports": [
+                "net.minecraft.world.level.levelgen.presets.WorldPreset"
+            ]
+        },
+        "decorated_pot_pattern": {
+            "type": "DecoratedPotPattern",
+            "reference": "DECORATED_POT_PATTERN",
+            "imports": [
+                "net.minecraft.world.level.block.entity.DecoratedPotPattern"
+            ]
+        },
+        "block_transformer": {
+            "type": "BlockTransformer",
+            "reference": "BLOCK_TRANSFORMER",
+            "imports": [
+                "net.minecraft.core.component.BlockTransformer"
+            ]
+        },
+        "dimension": {
+            "type": "LevelStem",
+            "reference": "LEVEL_STEM",
+            "imports": [
+                "net.minecraft.world.level.dimension.LevelStem"
+            ]
+        },
+        "loot_table": {
+            "type": "LootTable",
+            "reference": "LOOT_TABLE",
+            "imports": [
+                "net.minecraft.world.level.storage.loot.LootTable"
+            ]
+        },
+        "item_modifier": {
+            "type": "LootItemFunction",
+            "reference": "ITEM_MODIFIER",
+            "imports": [
+                "net.minecraft.world.level.storage.loot.functions.LootItemFunction"
+            ]
+        },
+        "predicate": {
+            "type": "LootItemCondition",
+            "reference": "PREDICATE",
+            "imports": [
+                "net.minecraft.world.level.storage.loot.predicates.LootItemCondition"
+            ]
+        },
+        "slot_source": {
+            "type": "SlotSource",
+            "reference": "SLOT_SOURCE",
+            "imports": [
+                "net.minecraft.world.item.slot.SlotSource"
+            ]
+        },
+        "context_float_provider": {
+            "type": "ContextFloatProvider",
+            "reference": "CONTEXT_FLOAT_PROVIDER",
+            "imports": [
+                "net.minecraft.world.level.storage.loot.providers.number.floats.ContextFloatProvider"
+            ]
+        },
+        "context_int_provider": {
+            "type": "ContextIntProvider",
+            "reference": "CONTEXT_INT_PROVIDER",
+            "imports": [
+                "net.minecraft.world.level.storage.loot.providers.number.ints.ContextIntProvider"
+            ]
+        },
+        "advancement": {
+            "type": "Advancement",
+            "reference": "ADVANCEMENT",
+            "imports": [
+                "net.minecraft.advancements.Advancement"
+            ]
+        },
+        "recipe": {
+            "type": "Recipe<?>",
+            "reference": "RECIPE",
+            "imports": [
+                "net.minecraft.world.item.crafting.Recipe"
+            ]
+        }
+    }
 }
