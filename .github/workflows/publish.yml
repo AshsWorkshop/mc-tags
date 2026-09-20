@@ -59,7 +59,7 @@ jobs:
       - name: Setup Java
         uses: AshsWorkshop/actions/setup-java@4b6fee62c3383c7c4a8b7878a74cce7707a98421 # main
         with:
-          java-version: ${{ steps.extract_java.outputs.java_version }}
+          java-version: 25
           distribution: 'microsoft'
 
       - name: Setup Gradle

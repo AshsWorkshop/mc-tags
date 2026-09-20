@@ -15,6 +15,9 @@ version = "${fullMinecraftVersion}.${providers.gradleProperty("${minecraftVersio
 val GENERATED_DIRECTORY = "generated"
 val GENERATED_JAVA = "java"
 
+// Set the toolchain version
+java.toolchain.languageVersion.set(JavaLanguageVersion.of(providers.gradleProperty("java_version").get()))
+
 // Configure vanilla mode
 neoForge.neoFormVersion = "${minecraftVersion}-1"
 

@@ -29,6 +29,9 @@ val GENERATED_SOURCES = "resources"
 val SOURCE_METADATA = "metadata"
 val INTERSECTION_THRESHOLD = 2
 
+// Set the toolchain version
+java.toolchain.languageVersion.set(JavaLanguageVersion.of(providers.gradleProperty("java_version").get()))
+
 // Configure vanilla mode
 neoForge.neoFormVersion = "${minecraftVersion}-1"
 neoForge.runs.create("reports") {
