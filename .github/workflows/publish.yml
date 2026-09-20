@@ -29,7 +29,32 @@ jobs:
       - name: Extract Java version
         id: extract_java
         shell: bash
-        run: echo "java_version=$(grep 'java_version' gradle.properties | awk -F= '{$2=$2;print $2}')" >> $GITHUB_OUTPUT
+        run: |
+          # Create temporary location
+          MANIFEST_DIR=$(mktemp -d)
+          
+          # Get the manifest
+          MANIFEST_FILE="$MANIFEST_DIR/manifest.json"
+          curl -f -o $MANIFEST_FILE https://piston-meta.mojang.com/mc/game/version_manifest_v2.json
+          
+          # Extract manifest data
+          PACKAGE_URL=$(jq -r --arg version "${{ matrix.versions }}" '.versions | map(select(.id == $version)) | .[0] | .url' $MANIFEST_FILE)
+          if [ $PACKAGE_URL = "null" ]; then
+            printf '%s\n' "${{ matrix.versions }} not found in the manifest!" >&2
+            exit 1
+          fi
+          # Get the metadata for the version
+          METADATA_FILE="$MANIFEST_DIR/metadata.json"
+          curl -f -o $METADATA_FILE $PACKAGE_URL
+          
+          # Validate sha1
+          echo "$(jq -r --arg version "${{ matrix.versions }}" '.versions | map(select(.id == $version)) | .[0] | .sha1' $MANIFEST_FILE) $METADATA_FILE" | sha1sum -c
+          
+          # Output java version
+          echo "java_version=$(jq -r '.javaVersion.majorVersion' $METADATA_FILE)" >> $GITHUB_OUTPUT
+          
+          # Cleanup temp
+          rm -r $MANIFEST_DIR
 
       - name: Setup Java
         uses: AshsWorkshop/actions/setup-java@4b6fee62c3383c7c4a8b7878a74cce7707a98421 # main
@@ -51,23 +76,23 @@ jobs:
           UUID_PASSWORD: ${{ secrets.UUID_PASSWORD }}
         run: |
           # Generate reports
-          ./gradlew runReports -Pminecraft_version='${{ matrix.versions }}'
+          ./gradlew runReports -Pminecraft_version='${{ matrix.versions }}' -Pjava_version='${{ steps.extract_java.outputs.java_version }}'
           
           # Unpack tags
-          ./gradlew unpackTags -Pminecraft_version='${{ matrix.versions }}' 
+          ./gradlew unpackTags -Pminecraft_version='${{ matrix.versions }}' -Pjava_version='${{ steps.extract_java.outputs.java_version }}'
 
           # Then generate and compute artifacts
-          ./gradlew computeTagIntersection -Pminecraft_version='${{ matrix.versions }}' 
-          ./gradlew generateJavaSources -Pminecraft_version='${{ matrix.versions }}' 
+          ./gradlew computeTagIntersection -Pminecraft_version='${{ matrix.versions }}' -Pjava_version='${{ steps.extract_java.outputs.java_version }}'
+          ./gradlew generateJavaSources -Pminecraft_version='${{ matrix.versions }}' -Pjava_version='${{ steps.extract_java.outputs.java_version }}'
 
           # Finally check tag hashes
-          ./gradlew createFileHashes -Pminecraft_version='${{ matrix.versions }}' 
+          ./gradlew createFileHashes -Pminecraft_version='${{ matrix.versions }}' -Pjava_version='${{ steps.extract_java.outputs.java_version }}'
 
           # If compare file doesn't exist or the file contents are not the same
           VERSION_RELEASE=""
           if [[ ! -f "build/compare/${{ matrix.versions }}.json" ]] || (! cmp -s ".generated-hashes/${{ matrix.versions }}.json" "build/compare/${{ matrix.versions }}.json"); then
             # Publish artifacts
-            ./gradlew publish -Pminecraft_version='${{ matrix.versions }}' 
+            ./gradlew publish -Pminecraft_version='${{ matrix.versions }}' -Pjava_version='${{ steps.extract_java.outputs.java_version }}'
 
             # Bump associated artifact version
             mod_build=$(grep '${{ matrix.versions }}_build' gradle.properties | awk -F= '{$2=$2;print $2}')
